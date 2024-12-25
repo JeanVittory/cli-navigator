@@ -27,6 +27,7 @@ fn load_project_paths() -> HashMap<String, String> {
         },
     };
 
+
     let paths_str = match env::var("PROJECT_PATHS") {
         Ok(val) => val,
         Err(err) => {
@@ -50,15 +51,20 @@ fn load_project_paths() -> HashMap<String, String> {
             }
         }
     }
-
     final_paths
 }
 
 
 fn main() {
     dotenv().ok();
+    
     let args = Args::parse();
     let project_name: String = args.project_name;
+
+    match dotenv() {
+        Ok(_) => println!("Archivo .env cargado correctamente"),
+        Err(e) => println!("Error cargando .env: {}", e),
+    }
     let project_paths = load_project_paths();
 
     println!("Project name: {}", project_name);
