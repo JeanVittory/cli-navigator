@@ -20,13 +20,23 @@ nav() {
         fi
     done < "$ENV_FILE"
 
-    echo "PROJECT_ALIASES: $PROJECT_ALIASES"
-    echo "PROJECT_PATHS: $PROJECT_PATHS"
-
-    target_dir=$(project_navigator "$1")
-    if [ $? -eq 0 ]; then
-        cd "$target_dir" || echo "Was not posible move into -> $target_dir"
-    else
-        echo "Error executing project_navigator file, please check the Rust project."
-    fi
+    case "$1" in
+        -a|--add)
+            project_navigator add "$2" "$3" "${@:4}"
+            ;;
+        -r|--remove)
+            project_navigator remove "$2"
+            ;;
+        -l|--list)
+            project_navigator list
+            ;;
+        *)
+            target_dir=$(project_navigator go "$1")
+            if [ $? -eq 0 ]; then
+                cd "$target_dir" || echo "No se pudo cambiar al directorio $target_dir"
+            else
+                echo "Error al ejecutar project_navigator."
+            fi
+            ;;
+    esac
 }
