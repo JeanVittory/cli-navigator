@@ -160,11 +160,10 @@ nav
   -a, --add <name> <path> <alias...>  Add Project
   -r, --remove <alias>                Delete Project
   -l, --list                          Show Projects
-  -g, --go                            Move into project
+  -g, --go <alias>                    Move into project
 ```
 
 ## nav --add
-
 With this command, you can add your projects, which will be available in the `.env` file of the project you cloned at the beginning.
 You must pass as parameters:
 
@@ -175,7 +174,7 @@ The project name
 The path where the project is located.
 
 ### alias 
-You must add an alias to refer to the project when you want to move to it.
+You must add an alias to refer to the project when you want to move to it. You can use several alias.
 
 ## nav --remove
 To delete a project, you simply need to add the project's alias to the command.
